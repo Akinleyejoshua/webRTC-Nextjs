@@ -152,6 +152,18 @@ button:hover, .icon:hover{
   -o-border-radius: 4px;
 }
 
+.room select{
+  background-color: transparent;
+  padding: 0 1rem;
+  border: 1px solid whitesmoke;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  width: max-content;
+}
+
 .s{
   padding: .4rem;
 }
