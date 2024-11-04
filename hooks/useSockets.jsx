@@ -7,9 +7,6 @@ const useSocket = () => {
       autoConnect: false,
       withCredentials: true,
       transports: ['polling', 'websocket'], // Notice polling is first
-      reconnection: true,
-      reconnectionAttempts: 5,
-      reconnectionDelay: 1000
     })
   )
 
