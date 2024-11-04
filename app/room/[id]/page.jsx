@@ -112,6 +112,7 @@ export default function Room() {
             } else if (type == "screen") {
                 const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
                 videoRef.current.srcObject = stream;
+                videoRef.current.muted = true
 
                 const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
                 peerConnectionRef.current = new RTCPeerConnection(configuration);
