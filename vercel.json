@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "functions": {
+    "https://ultrashare-api.vercel.app": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
+}
