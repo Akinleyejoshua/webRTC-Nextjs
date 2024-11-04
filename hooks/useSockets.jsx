@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 
 const useSocket = () => {
   let socket = useRef(
-    io("https://ultrashare-api.vercel.app", {
+    io("https://ultrashare-api.onrender.com", {
       autoConnect: false,
       withCredentials: true,
       transports: ['polling', 'websocket'], // Notice polling is first
