@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 
 const useSocket = () => {
   let socket = useRef(
-    io("http://localhost:4000/", {
+    io("https://ultrashare-api.vercel.app/", {
       autoConnect: false,
     })
   )
