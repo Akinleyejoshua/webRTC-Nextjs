@@ -96,7 +96,7 @@ export default function Client() {
         <main className="room flex">
             <div className="center">
                 <div className="video">
-                    <video autoPlay={true} controls={true} ref={videoRef}></video>
+                    <video autoPlay={true} controls={false} ref={videoRef}></video>
                     <div className="overlay flex">
                         <small>ROOM ID: {roomName}</small>
                     </div>
