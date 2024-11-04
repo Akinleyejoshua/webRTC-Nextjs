@@ -5,7 +5,7 @@ import useWebRTC from "@/hooks/useWebRTC";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { io } from 'socket.io-client';
-
+import { AiOutlinePlayCircle, AiOutlineShareAlt, AiOutlineStop, AiOutlineWifi } from "react-icons/ai";
 
 const config = {
     iceServers: [
@@ -18,7 +18,7 @@ const config = {
 
 export default function Room() {
     const { socket: socketRef } = useSocket();
-    const { id: roomName } = useParams();    
+    const { id: roomName } = useParams();
     const [roomId, setRoomId] = useState(roomName);
     const [streaming, setStreaming] = useState(false);
 
@@ -121,9 +121,36 @@ export default function Room() {
         setRoomId('');
     };
 
+    const shearRoomLink = () => {
+        window.navigator.clipboard.writeText(`${location.host}/client/${roomName}`)
+    }
+
     return (
-        <main className="room">
-          
+        <main className="room flex">
+            <div className="center">
+                <div className="video">
+                    <video autoPlay={true} ref={videoRef}></video>
+                    <div className="overlay flex">
+                        <small>ROOM ID: {roomName}</small>
+                    </div>
+                    <div className="controls">
+                        <div className="msg">
+                            {!streaming ? <small>Offline</small> : <small className="red flex blink items-center">You are live <AiOutlineWifi className="icon" /></small>}
+                        </div>
+                        <div className="s"></div>
+                        <div className="flex">
+                            {!streaming ? (<AiOutlinePlayCircle className="icon" onClick={startStream} />) : (
+                                <AiOutlineStop className="icon red" onClick={stopStream} />
+                            )}
+                            <div className="s"></div>
+                            <AiOutlineShareAlt className="icon" onClick={shearRoomLink} />
+
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
         </main>
     );
 }

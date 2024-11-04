@@ -2,6 +2,7 @@
 import useSocket from "@/hooks/useSockets";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { AiOutlineWifi } from "react-icons/ai";
 
 export default function Client() {
     const { socket: socketRef } = useSocket();
@@ -92,8 +93,28 @@ export default function Client() {
     };
 
     return (
-        <main className="room">
-           
+        <main className="room flex">
+            <div className="center">
+                <div className="video">
+                    <video autoPlay={true} ref={videoRef}></video>
+                    <div className="overlay flex">
+                        <small>ROOM ID: {roomName}</small>
+                    </div>
+                    <div className="controls">
+                        <div className="msg">
+                            {!connected ? <small className="red">Disconnected</small> : <small className="blue flex blink items-center">Connected <AiOutlineWifi className="icon" /></small>}
+                        </div>
+                        <div className="s"></div>
+                        <div className="flex">
+                            {!connected ? (<button className="icon blue" onClick={joinRoom}>Join</button>) : (
+                                <button className="icon red" onClick={leaveRoom}>Leave</button>
+                            )}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </main>
     );
 }

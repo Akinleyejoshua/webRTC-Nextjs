@@ -12,3 +12,178 @@
   font-family: "Bricolage Grotesque", sans-serif;
   font-optical-sizing: auto;
 }
+
+:root{
+  --inputbg: rgb(236, 232, 232);
+  --red: rgb(248, 46, 46);
+  --black: rgb(22, 21, 21);
+
+}
+
+main{
+  height: 100vh;
+}
+
+.home{
+  display: flex;
+}
+
+.home h1{
+  font-size: 60px;
+}
+
+.home input{
+  padding: 1rem;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border: none;
+  background-color: var(--inputbg);
+  text-align: center;
+  font-weight: 900;
+}
+
+.home button{
+  width: 100%;
+  border: none;
+  padding: 1rem;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover, .icon:hover{
+  opacity: .4;
+}
+
+*:hover, *:focus{
+  outline: none;
+  border: none;
+}
+
+.home button:first-child{
+  background-color: royalblue;
+  color: white;
+}
+
+.home button:last-child{
+  color: white;
+  background-color: var(--red);
+}
+
+.room .video{
+  height: max-content;
+  width: 100%;
+  background-color: var(--black);
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.room .overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  color: white;
+  justify-content: center;
+  place-items: center;
+}
+
+.room .controls{
+  /* position: absolute; */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 1rem;
+  color: white;
+  background-color: rgba(43, 38, 38, 0.651);
+  backdrop-filter: blur(0px);
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.room .icon{
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.room .msg{
+  width: max-content;
+}
+
+.blue{
+  color: royalblue;
+}
+
+.red{
+  color: var(--red);
+}
+
+.room video{
+  width: max-content;
+  height: 80vh;
+}
+
+.room button{
+  padding: 0 1rem;
+  border: none;
+
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.s{
+  padding: .4rem;
+}
+
+.center{
+  margin: auto;
+}
+
+.flex{
+  display: flex;
+}
+
+.col{
+  flex-direction: column;
+}
+
+.items-center{
+  place-items: center;
+  justify-content: center;
+}
+
+.blink{
+  animation: .4s infinite blink;
+  -webkit-animation: .4s infinite blink;
+}
+
+@keyframes blink {
+  from{
+    opacity: 1;
+  }
+
+  to{
+    opacity: .8;
+  }
+}
