@@ -97,6 +97,7 @@ export default function Room() {
             if (type == "cam") {
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
                 videoRef.current.srcObject = stream;
+                videoRef.current.muted = true
 
                 const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
                 peerConnectionRef.current = new RTCPeerConnection(configuration);
