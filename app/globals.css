@@ -187,3 +187,18 @@ button:hover, .icon:hover{
     opacity: .8;
   }
 }
+
+
+@media screen and (max-width: 740px) {
+  .room video{
+    width: 100%;
+  }
+
+  .room .center{
+    margin: 0;
+  }
+
+  .home h1{
+    font-size: 30px;
+  }
+}
