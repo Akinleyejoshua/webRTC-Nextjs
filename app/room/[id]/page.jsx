@@ -90,22 +90,42 @@ export default function Room() {
         };
     }, [roomName])
 
+    const [type, setType] = useState("");
+
     const startStream = async () => {
         try {
-            const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
-            videoRef.current.srcObject = stream;
+            if (type == "cam") {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                videoRef.current.srcObject = stream;
 
-            const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
-            peerConnectionRef.current = new RTCPeerConnection(configuration);
+                const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+                peerConnectionRef.current = new RTCPeerConnection(configuration);
 
-            stream.getTracks().forEach(track => {
-                peerConnectionRef.current.addTrack(track, stream);
-            });
+                stream.getTracks().forEach(track => {
+                    peerConnectionRef.current.addTrack(track, stream);
+                });
 
-            // const generatedRoomId = Math.random().toString(36).substring(7);
-            setRoomId(roomName);
-            socketRef.current.emit('createRoom', { roomId: roomName });
-            setStreaming(true);
+                // const generatedRoomId = Math.random().toString(36).substring(7);
+                setRoomId(roomName);
+                socketRef.current.emit('createRoom', { roomId: roomName });
+                setStreaming(true);
+            } else if (type == "screen") {
+                const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
+                videoRef.current.srcObject = stream;
+
+                const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+                peerConnectionRef.current = new RTCPeerConnection(configuration);
+
+                stream.getTracks().forEach(track => {
+                    peerConnectionRef.current.addTrack(track, stream);
+                });
+
+                // const generatedRoomId = Math.random().toString(36).substring(7);
+                setRoomId(roomName);
+                socketRef.current.emit('createRoom', { roomId: roomName });
+                setStreaming(true);
+            }
+            
         } catch (error) {
             console.error('Error starting stream:', error);
         }
@@ -119,6 +139,7 @@ export default function Room() {
         socketRef.current.emit('leaveRoom', { roomId });
         setStreaming(false);
         setRoomId('');
+        setType("")
     };
 
     const shearRoomLink = () => {
@@ -135,17 +156,33 @@ export default function Room() {
                     </div>
                     <div className="controls">
                         <div className="msg">
-                            {!streaming ? <small>Offline</small> : <small className="red flex blink items-center">You are live <AiOutlineWifi className="icon" /></small>}
+                            {!streaming ? <small className="red">Offline</small> : <small className="red flex blink items-center">You are live <AiOutlineWifi className="icon" /></small>}
                         </div>
                         <div className="s"></div>
-                        <div className="flex">
-                            {!streaming ? (<AiOutlinePlayCircle className="icon" onClick={startStream} />) : (
-                                <AiOutlineStop className="icon red" onClick={stopStream} />
-                            )}
-                            <div className="s"></div>
-                            <AiOutlineShareAlt className="icon" onClick={shearRoomLink} />
 
-                        </div>
+                        {type != "" ?
+                            <div className="flex">
+
+                                {!streaming ? (<AiOutlinePlayCircle className="icon" onClick={startStream} />) : (
+                                    <AiOutlineStop className="icon red" onClick={stopStream} />
+                                )}
+                                <div className="s"></div>
+                                <AiOutlineShareAlt className="icon" onClick={shearRoomLink} />
+
+                            </div>
+                            :
+                            <div className="flex col">
+                                <small>Select media</small>
+                                <div className="s"></div>
+                                <select onChange={e => setType(e.target.value)}>
+                                    <option></option>
+                                    <option>cam</option>
+                                    <option>screen</option>
+                                </select>
+                    
+                            </div>
+                          
+                        }
                        
                     </div>
                 </div>
