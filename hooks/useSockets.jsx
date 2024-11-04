@@ -5,6 +5,8 @@ const useSocket = () => {
   let socket = useRef(
     io("https://ultrashare-api.vercel.app", {
       autoConnect: false,
+        withCredentials: true,
+        transports: ['websocket', 'polling']
     })
   )
 
