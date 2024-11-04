@@ -143,7 +143,7 @@ export default function Room() {
     };
 
     const shearRoomLink = () => {
-        window.navigator.clipboard.writeText(`${location.host}/client/${roomName}`)
+        window.navigator.clipboard.writeText(`http://${location.host}/client/${roomName}`)
     }
 
     return (
